@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">Perfil</div>
+        <div class="panel-body">
+            <legend><i class="ion-clipboard"></i>Visualizar Perfil</legend>
+            <form method="post" >
+                <div class="form-group">
+                    <label class="control-label"><i class="ion-person"></i> Usuário</label>
+                    <input type="text" disabled class="form-control" ng-model="user.username" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label"><i class="ion-at"></i> E-mail</label>
+                    <input type="email" disabled class="form-control" ng-model="user.email" />
+                </div>
+                <button class="btn btn-padrao" data-toggle="modal" data-target="#modal-user">Alterar Senha</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="modal-user" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="modal-confirm" ng-submit="updatePassword()" role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Alterar Senha</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Senha Atual</label>
+                                <input type="password" class="form-control input-sm" required ng-model="profile.currentPassword" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Nova Senha</label>
+                                <input type="password" class="form-control input-sm" required ng-model="profile.newPassword" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Confirmar Senha</label>
+                                <input type="password" class="form-control input-sm" required ng-model="profile.confirmPassword" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-padrao" >Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+
+
+.fa-red {
+    color: red;
+}
+.fa-white{
+    color: white;
+}
+
+.fa-red{
+    color: red;
+}
+
+.col-center{
+    text-align: center;
+    font-size: small;
+}
+.col-right{
+    font-size: small;
+    text-align: right;
+}
+
+.col-left{
+    font-size: small;
+    text-align: left;
+}
+
+
+.col-width-small{
+    font-size: small;
+    width: 70px;
+}
+
+.navbar-brand {
+    float: left;
+    font-size: 18px;
+    height: 50px;
+    line-height: 20px;
+    padding: 5px !important;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    background-color: #868686 !important;
+}
+
+.login {
+    background-color: #314C58 !important
+}
+
+.login-title{
+    color: #FFFFFF !important;
+    font-weight: bold !important;
+}
+
+.btn-padrao {
+    background-color: #314C58 !important;
+    color: #FFFFFF !important;
+    font-weight: bold !important;
+}
+
+.menu-label{
+    color: #FFFFFF !important;
+}
+
+.panel-heading {
+    background-color: #314c58 !important;
+    color: #FFFFFF !important;
+}
+
+.panel-footer {
+    background-color: #314c58 !important;
+    height: 50px!important;
+    color: #FFFFFF !important;
+}
+
+.pagination {
+    border-radius: 4px;
+    margin: 0px 0 !important;
+    padding-left: 0;
+    font-size: 12px !important;
+}
+
+.pagination .pull-right {
+    float: none !important;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: #314c58!important;
+    border-color: #314c58!important;
+}
+
+.btn-export {
+    padding: 0px!important;
+}
+
+.btn-export .hover{
+    color: #FFFFFF !important
+}
+
+.bold{
+    font-weight: bold;
+}

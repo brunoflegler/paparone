@@ -1,0 +1,33 @@
+{
+  "name": "client",
+  "authors": [
+    "Bruno Flegler DalCol <bruno.flegler@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-sanitize": "^1.5.5",
+    "angular-input-masks": "^2.3.0",
+    "angular-toastr": "^1.7.0",
+    "html5-boilerplate": "~5.2.0",
+    "angular-ui-router": "ui-router#^0.3.0",
+    "angularUtils-pagination": "angular-utils-pagination#^0.11.1",
+    "bootstrap": "^3.3.6",
+    "satellizer": "^0.14.0",
+    "ng-table-to-csv": "^0.3.0",
+    "ObjectId.js": "objectid.js#1.0.0",
+    "angular": "^1.5.6",
+    "jquery": "^2.2.4",
+    "angular-animate": "^1.5.6"
+  }
+}

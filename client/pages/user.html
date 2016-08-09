@@ -1,0 +1,63 @@
+<div id="grid" class="container">
+    <div class="row" >
+        <div class="col-md-12">
+            <table class="table table-condensed table-striped">
+                <thead>
+                <th class="col-left" >#</th>
+                <th class="col-left" >Usuário</th>
+                <th class="col-left" >E-mail</th>
+                <th class="col-center">Opções</th>
+                </thead>
+                <tbody>
+                <tr ng-if="!load" ng-repeat="user in users">
+                    <td class="col-left">{{user._id}}</td>
+                    <td class="col-left">{{user.username}}</td>
+                    <td class="col-left">{{user.email}}</td>
+                    <td class="col-center" >
+                        <button ng-click="edit(user)" class="btn btn-default btn-sm" type="button"><a class="fa fa-pencil"></a></button>&nbsp;
+                        <!--<button ng-click="delete(form)" class="btn btn-danger btn-sm" type="button"><a class="fa fa-trash-o fa-white"></a></button>&nbsp;-->
+                        <!--<button ng-click="export(form, form.name)" class="btn btn-default btn-sm" type="button"><a class="fa fa-file-pdf-o fa-red"></a></button>-->
+                    </td>
+                </tr>
+                </tbody>
+                <tr ng-if="load">
+                    <td class="col-md-12 col-center" colspan="3">
+                        <label>Carregando &nbsp;&nbsp;<a class="fa fa-spinner fa-spin"></a></label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-md-12">
+            <button class="btn btn-padrao" ng-click="new()" type="button"><a class="fa fa-plus fa-white"></a>&nbsp;&nbsp;&nbsp;Adicionar </button>&nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+
+</div>
+<div id="user" class="container hide">
+    <form ng-submit="save()">
+        <div class="row" >
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Usuário</label>
+                    <input class="form-control input-sm" required ng-model="user.username" >
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input class="form-control input-sm" required ng-model="user.email" >
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 15px">
+            <div class="col-md-offset-10 col-md-1 ">
+                <button class="btn btn-default" ng-click="back()" type="button"><a class="fa fa-undo"></a>&nbsp;&nbsp;&nbsp;Fechar </button>
+            </div>
+            <div class=" col-md-1">
+                <button class="btn btn-padrao" type="submit"><a class="fa fa-plus fa-white"></a>&nbsp;&nbsp;&nbsp;Salvar </button>
+            </div>
+        </div>
+    </form>
+</div>
