@@ -37,6 +37,7 @@
     height: 50px;
     line-height: 20px;
     padding: 5px !important;
+    color: #FFFFFF !important;
 }
 
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {

@@ -17,11 +17,13 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
 
 var api = {};
 api.users = require('./modules/users/route');
+api.products = require('./modules/products/route');
 api.validation = require('./modules/validation/route');
 
 
 app.use(cors());
 app.use('/users', api.users);
+app.use('/products', api.products);
 app.use('/', api.validation);
 app.use(express.static(path.join(__dirname, './client')));
 

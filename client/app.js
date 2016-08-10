@@ -9,7 +9,8 @@ var myApp = angular.module('myApp', ['' +
     'ui.utils.masks',
     'toastr',
     'satellizer',
-    'angularUtils.directives.dirPagination'
+    'angularUtils.directives.dirPagination',
+    'ui.utils.masks'
 ]);
 
 myApp.config(function($stateProvider, $urlRouterProvider, $authProvider) {

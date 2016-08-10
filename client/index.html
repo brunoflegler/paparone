@@ -32,8 +32,8 @@
 <script src="bower_components/ObjectId.js/src/main/javascript/Objectid.js"></script>
 <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
 <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
+<script src="bower_components/angular-input-masks/angular-input-masks-standalone.min.js"></script>
 
-<script src="js/socket.io.js"></script>
 <script src="app.js"></script>
 <script src="js/service/URL.js"></script>
 <script src="js/service/account.js"></script>
@@ -54,12 +54,12 @@
 
 <div ng-controller="navbarController" style="background-color: #314C58; font-weight: bold"  class="navbar navbar-default navbar-static-top">
   <div class="navbar-header">
-    <a class="navbar-brand" href="#/home"><img src="./img/logo.png" alt="Smiley face" height="40" width="140px"></a>
+    <a class="navbar-brand" href="#/home">Paparone</a>
   </div>
   <ul class="nav navbar-nav">
     <li><a href=#/home" class="menu-label">Home</a></li>
     <li class="dropdown" ng-if="isAuthenticated()">
-      <a class="dropdown-toggle" style="color: #FFFFFF" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Formulários<span class="caret"></span></a>
+      <a class="dropdown-toggle" style="color: #FFFFFF" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro<span class="caret"></span></a>
       <ul class="dropdown-menu">
         <li><a href="#/product" >Produtos</a></li>
         <!--<li><a href="#/answer">Respostas</a></li>-->

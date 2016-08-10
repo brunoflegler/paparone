@@ -17,7 +17,7 @@
   ],
   "dependencies": {
     "angular-sanitize": "^1.5.5",
-    "angular-input-masks": "^2.3.0",
+    "angular-input-masks": "^2.4.0",
     "angular-toastr": "^1.7.0",
     "html5-boilerplate": "~5.2.0",
     "angular-ui-router": "ui-router#^0.3.0",
