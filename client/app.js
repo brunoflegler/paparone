@@ -57,7 +57,6 @@ myApp.config(function($stateProvider, $urlRouterProvider, $authProvider) {
         });
 
     $urlRouterProvider.otherwise('/');
-   $authProvider.loginUrl = 'http://paparone-paparone.44fs.preview.openshiftapps.com/auth/login';
 });
 
 function skipIfLoggedIn($q, $auth) {
