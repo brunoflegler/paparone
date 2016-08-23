@@ -4,7 +4,6 @@ var database = require('./config/database'),
     app = express(),
     bodyParser = require('body-parser'),
     http = require('http').Server(app),
-    io = require('socket.io').listen(http),
     cors = require('cors'),
     path = require('path'),
     jwt = require('jwt-simple');
@@ -12,20 +11,24 @@ var database = require('./config/database'),
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 443,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 
 var api = {};
 api.users = require('./modules/users/route');
 api.products = require('./modules/products/route');
+api.recipes = require('./modules/recipes/route');
+api.estimates = require('./modules/estimates/route');
 api.validation = require('./modules/validation/route');
 
 
 app.use(cors());
-app.use('/users', api.users);
-app.use('/products', api.products);
-app.use('/', api.validation);
-app.use(express.static(path.join(__dirname, './client')));
+app.use('/paparone/users', api.users);
+app.use('/paparone/products', api.products);
+app.use('/paparone/recipes', api.recipes);
+app.use('/paparone/estimates', api.estimates);
+app.use('/paparone/', api.validation);
+app.use('/paparone', express.static(path.join(__dirname, './client')));
 
 
 app.get('/ping', function (req, res) {

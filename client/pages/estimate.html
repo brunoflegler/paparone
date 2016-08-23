@@ -1,0 +1,102 @@
+<div id="grid" class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title"><i class="fa fa-table"></i>&nbsp;&nbsp;&nbsp;Listagem de Estimativas</span>
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed table-striped" export-csv="csv" separator=";" >
+                <thead >
+                <th class="col-left" >#</th>
+                <th class="col-left" >Receita</th>
+                <!--<th class="col-left" >R$</th>-->
+                <th class="col-center">Opções</th>
+                </thead>
+                <tbody>
+                <tr dir-paginate="estimate in estimates | filter:q | itemsPerPage: pageSize" total-items="totalItens" current-page="currentPage" >
+                    <td class="col-left">{{estimate._id}}</td>
+                    <td class="col-left">{{estimate.name}}</td>
+                    <!--<td class="col-left">{{product.vlr_unit}}</td>-->
+                    <td class="col-center" >
+                        <button ng-click="edit(estimate)" class="btn btn-default btn-sm" type="button"><a class="fa fa-pencil"></a></button>&nbsp;
+                        <button ng-click="delete(estimate)" class="btn btn-danger btn-sm" type="button"><a class="fa fa-trash-o fa-white"></a></button>&nbsp;
+                    </td>
+                </tr>
+                </tbody>
+                <tr ng-if="load">
+                    <td class="col-md-12 col-center" colspan="4">
+                        <label><a class="fa fa-spinner fa-spin"></a></label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel-footer" >
+            <button ng-click="new()" class="btn btn-default btn-sm"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Adicionar</button>
+            <dir-pagination-controls class="pull-right" boundary-links="true" auto-hide="false"  on-page-change="pageChangeHandler(newPageNumber)" template-url="./bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+            <div class="pull-right col-md-1">
+                <div class="form-group">
+                    <select ng-model="pageSize"
+                            required=""
+                            class="form-control input-sm">
+                        <option value="5">5</option>
+                        <option ng-selected="pageSize == 10" value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>
+            <div class="pull-right">
+                <span style="line-height: 30px">Total de registros: {{totalItens}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="formulario" class="container hide">
+    <form ng-submit="save()">
+        <div class="row" >
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Receita</label>
+                    <select name="condition" class="form-control input-sm" ng-model="estimate"
+                            ng-options="recipe as recipe.name for recipe in recipes " >
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-condensed table-striped" >
+                    <thead >
+                    <th class="col-left" >Produto</th>
+                    <th class="col-left" >Quantidade</th>
+                    <th class="col-left" >Valor</th>
+                    <th class="col-center">Opções</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="ingredient in estimate.ingredients" >
+                        <td class="col-left">{{ingredient.product.name}}</td>
+                        <td class="col-left">{{ingredient.quantity}}</td>
+                        <td class="col-left">{{(ingredient.quantity * ingredient.product.vlr_unit)/1000 }}</td>
+                        <td class="col-center" >
+                            <button ng-click="editIngredient($index)" class="btn btn-default btn-sm" type="button"><a class="fa fa-pencil"></a></button>&nbsp;
+                            <button ng-click="deleteIngredient($index)" class="btn btn-danger btn-sm" type="button"><a class="fa fa-trash-o fa-white"></a></button>&nbsp;
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tr ng-if="load">
+                        <td class="col-md-12 col-center" colspan="4">
+                            <label><a class="fa fa-spinner fa-spin"></a></label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        <div class="row" style="padding-top: 15px">
+            <div class="col-md-offset-10 col-md-1 ">
+                <button class="btn btn-default" ng-click="back()" type="button"><a class="fa fa-undo"></a>&nbsp;&nbsp;&nbsp;Fechar </button>
+            </div>
+            <div class=" col-md-1">
+                <button class="btn btn-primary" type="submit"><a class="fa fa-plus fa-white"></a>&nbsp;&nbsp;&nbsp;Salvar </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -55,9 +55,24 @@ myApp.config(function($stateProvider, $urlRouterProvider, $authProvider) {
             resolve: {
                 loginRequired: loginRequired
             }
+        }).state('recipe', {
+            url: '/recipe',
+            templateUrl: 'pages/recipe.html',
+            controller: 'recipeController',
+            resolve: {
+                loginRequired: loginRequired
+            }
+        }).state('estimate', {
+            url: '/estimate',
+            templateUrl: 'pages/estimate.html',
+            controller: 'estimateController',
+            resolve: {
+                loginRequired: loginRequired
+            }
         });
 
     $urlRouterProvider.otherwise('/');
+    $authProvider.loginUrl = '/paparone/auth/login';
 });
 
 function skipIfLoggedIn($q, $auth) {

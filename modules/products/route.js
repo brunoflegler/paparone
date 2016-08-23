@@ -26,6 +26,7 @@ router.get('/:id', function(req, res) {
 });
 
 router.get('/:skip/:limit', function (req, res) {
+    console.log(req.params.skip);
     Product.find({}, function(err, Forms) {
         if(err) {
             res.status(400);
@@ -33,7 +34,7 @@ router.get('/:skip/:limit', function (req, res) {
         } else {
             res.send(Forms);
         }
-    }).skip(req.params.skip).limit(req.params.limit)
+    }).skip(parseInt(req.params.skip)).limit(parseInt(req.params.limit))
 });
 
 router.post('/', function(req, res) {

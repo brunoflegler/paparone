@@ -1,0 +1,215 @@
+<div id="grid" class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <span class="panel-title"><i class="fa fa-table"></i>&nbsp;&nbsp;&nbsp;Listagem de Receitas</span>
+        </div>
+        <div class="panel-body">
+            <table class="table table-condensed table-striped" export-csv="csv" separator=";" >
+                <thead >
+                <th class="col-left" >#</th>
+                <th class="col-left" >Receita</th>
+                <th class="col-center">Opções</th>
+                </thead>
+                <tbody>
+                <tr dir-paginate="recipe in recipes | filter:q | itemsPerPage: pageSize" total-items="totalItens" current-page="currentPage" >
+                    <td class="col-left">{{recipe._id}}</td>
+                    <td class="col-left">{{recipe.name}}</td>
+                    <td class="col-center" >
+                        <button ng-click="edit(recipe)" class="btn btn-default btn-sm" type="button"><a class="fa fa-pencil"></a></button>&nbsp;
+                        <button ng-click="delete(recipe)" class="btn btn-danger btn-sm" type="button"><a class="fa fa-trash-o fa-white"></a></button>&nbsp;
+                    </td>
+                </tr>
+                </tbody>
+                <tr ng-if="load">
+                    <td class="col-md-12 col-center" colspan="4">
+                        <label><a class="fa fa-spinner fa-spin"></a></label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel-footer" >
+            <button ng-click="new()" class="btn btn-default btn-sm"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;Adicionar</button>
+            <dir-pagination-controls class="pull-right" boundary-links="true" auto-hide="false"  on-page-change="pageChangeHandler(newPageNumber)" template-url="./bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+            <div class="pull-right col-md-1">
+                <div class="form-group">
+                    <select ng-model="pageSize"
+                            required=""
+                            class="form-control input-sm">
+                        <option value="5">5</option>
+                        <option ng-selected="pageSize == 10" value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>
+            <div class="pull-right">
+                <span style="line-height: 30px">Total de registros: {{totalItens}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="formulario" class="container hide">
+    <form ng-submit="save()">
+        <!--{{recipe.complements}}-->
+        <div class="row" >
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Nome da Receita</label>
+                    <input class="form-control input-sm" required ng-model="recipe.name" >
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <label>Lista de Ingredientes</label>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-condensed table-striped" >
+                    <thead >
+                    <th class="col-left" >Produto</th>
+                    <th class="col-left" >Quantidade</th>
+                    <th class="col-center">Opções</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="ingredient in ingredients" >
+                        <td class="col-left">{{ingredient.product.name}}</td>
+                        <td class="col-left">{{ingredient.quantity}}</td>
+                        <td class="col-center" >
+                            <button ng-click="editIngredient($index)" class="btn btn-default btn-sm" type="button"><a class="fa fa-pencil"></a></button>&nbsp;
+                            <button ng-click="deleteIngredient($index)" class="btn btn-danger btn-sm" type="button"><a class="fa fa-trash-o fa-white"></a></button>&nbsp;
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tr ng-if="load">
+                        <td class="col-md-12 col-center" colspan="4">
+                            <label><a class="fa fa-spinner fa-spin"></a></label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-default" ng-click="modalIngredients()" type="button"><a class="fa fa-plus"></a>&nbsp;&nbsp;&nbsp;Ingredientes </button>
+            </div>
+        </div>
+        <hr/>
+        <label>Lista de Complementos</label>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-condensed table-striped" >
+                    <thead >
+                    <th class="col-left" >Complemento</th>
+                    <th class="col-left" >Quantidade</th>
+                    <th class="col-center">Opções</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="complement in complements" >
+                        <td class="col-left">{{complement.complement.name}}</td>
+                        <td class="col-left">{{complement.quantity}}</td>
+                        <td class="col-center" >
+                            <button ng-click="editComplement($index)" class="btn btn-default btn-sm" type="button"><a class="fa fa-pencil"></a></button>&nbsp;
+                            <button ng-click="deleteComplement($index)" class="btn btn-danger btn-sm" type="button"><a class="fa fa-trash-o fa-white"></a></button>&nbsp;
+                        </td>
+                    </tr>
+                    <!--<tr >-->
+                        <!--<td colspan="3">Nenhum registro encontrado.</td>-->
+                    <!--</tr>-->
+                    </tbody>
+                    <tr ng-if="load">
+                        <td class="col-md-12 col-center" colspan="4">
+                            <label><a class="fa fa-spinner fa-spin"></a></label>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-default" ng-click="modalComplements()" type="button"><a class="fa fa-plus"></a>&nbsp;&nbsp;&nbsp;Complementos </button>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 15px">
+            <div class="col-md-offset-10 col-md-1 ">
+                <button class="btn btn-default" ng-click="back()" type="button"><a class="fa fa-undo"></a>&nbsp;&nbsp;&nbsp;Fechar </button>
+            </div>
+            <div class=" col-md-1">
+                <button class="btn btn-primary" type="submit"><a class="fa fa-plus fa-white"></a>&nbsp;&nbsp;&nbsp;Salvar </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="modalIngredients" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Adicionar Ingredientes</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" >
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Produtos</label>
+                            <select name="condition" class="form-control input-sm" ng-model="productSelect.product"
+                                    ng-options="product as product.name for product in products " >
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Quantidade</label>
+                            <input class="form-control input-sm"  ng-model="productSelect.quantity" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-sm"  ng-click="addProduct()"><i class="fa fa-plus" ></i> &nbsp;&nbsp; Adicionar </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="modalComplements" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Adicionar Complementos</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row" >
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Complementos</label>
+                            <select name="condition" class="form-control input-sm" ng-model="complementSelect.complement"
+                                    ng-options="complement as complement.name for complement in resultComplements " >
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Quantidade</label>
+                            <input class="form-control input-sm"  ng-model="complementSelect.quantity" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-sm"  ng-click="addComplement()"><i class="fa fa-plus" ></i> &nbsp;&nbsp; Adicionar </button>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -5,10 +5,10 @@ myApp.controller('productController', function($scope, $http, URL, toastr) {
     $scope.totalItens = 0;
 
 
-    //TODO lista forms
+    //TODO lista products
     $scope.list = function () {
         $scope.load = true;
-        $http.get('products/' + 0 + '/' + $scope.pageSize ).then(function (response) {
+        $http.get(URL.base + 'products/' + 0 + '/' + $scope.pageSize ).then(function (response) {
             $scope.products = response.data;
             $scope.load = false;
         }, function (error) {
@@ -19,7 +19,7 @@ myApp.controller('productController', function($scope, $http, URL, toastr) {
     //TODO lista total forms
     $scope.total = function () {
         $scope.load = true;
-        $http.get('products' ).then(function (response) {
+        $http.get(URL.base + 'products' ).then(function (response) {
             $scope.totalItens = response.data.length;
         }, function (error) {
             console.log(error);
@@ -45,7 +45,7 @@ myApp.controller('productController', function($scope, $http, URL, toastr) {
 
     //TODO delete to product
     $scope.delete = function (product) {
-        $http.delete( 'products/' + product._id).then(function (response) {
+        $http.delete(URL.base +  'products/' + product._id).then(function (response) {
             $scope.list();
         }, function (error) {
             console.log(error);
@@ -62,7 +62,7 @@ myApp.controller('productController', function($scope, $http, URL, toastr) {
     //TODO save to product
     $scope.save = function(){
         if($scope.product._id == null) {
-            $http.post('products', $scope.product).then(function (response) {
+            $http.post(URL.base + 'products', $scope.product).then(function (response) {
                 toastr.success('Resgistro salvo!', 'Sucesso!');
                 $scope.list();
                 $scope.back();
@@ -71,7 +71,7 @@ myApp.controller('productController', function($scope, $http, URL, toastr) {
                 console.log(error);
             });
         }else{
-            $http.put('products', $scope.product).then(function (response) {
+            $http.put(URL.base + 'products', $scope.product).then(function (response) {
                 toastr.success('Resgistro salvo!', 'Sucesso!');
                 $scope.list();
                 $scope.back();

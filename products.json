@@ -1,0 +1,24 @@
+{
+	"_id" : ObjectId("57aa881addb74a78206059d9"),
+	"name" : "Azeite",
+	"vlr_unit" : "13.03",
+	"__v" : 0
+},
+{
+	"_id" : ObjectId("57aa885d53be0e50186e99f6"),
+	"name" : "Sal",
+	"vlr_unit" : "4.7",
+	"__v" : 0
+},
+{
+	"_id" : ObjectId("57aa8b8a99acb9141b071ae1"),
+	"name" : "Frango temperado desfiado",
+	"vlr_unit" : "14.97",
+	"__v" : 0
+},
+{
+	"_id" : ObjectId("57acef3b4ddc99e6116a1ed3"),
+	"name" : "Feijão",
+	"vlr_unit" : "9.9",
+	"__v" : 0
+},

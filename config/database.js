@@ -3,7 +3,8 @@
  */
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://bruno.dalcol:213590@ds139705.mlab.com:39705/paparone')
+//mongoose.connect('mongodb://bruno.dalcol:213590@ds139705.mlab.com:39705/paparone')
+mongoose.connect('mongodb://localhost:27017/paparone');
 
 var database = mongoose.connection;
 

@@ -90,8 +90,7 @@ router.post('/auth/login', function(req, res) {
         if(err) {
             res.status(404);
             res.json(err.message);
-        } else
-        if(user != null) {
+        } else if(user != null) {
             user.comparePassword(req.body.password, function (err, isMatch) {
                 if (err || !isMatch) {
                     res.status(401);
