@@ -69,6 +69,13 @@ myApp.config(function($stateProvider, $urlRouterProvider, $authProvider) {
             resolve: {
                 loginRequired: loginRequired
             }
+        }).state('unit', {
+            url: '/unit',
+            templateUrl: 'pages/unit.html',
+            controller: 'unitController',
+            resolve: {
+                loginRequired: loginRequired
+            }
         });
 
     $urlRouterProvider.otherwise('/');

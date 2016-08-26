@@ -54,7 +54,10 @@ myApp.controller('estimateController', function($scope, $http, URL, toastr) {
 
     //TODO new estimate
     $scope.new = function(){
-        $scope.estimate = {}
+        $scope.estimate = {};
+        $scope.estimate.ingredients = [];
+        $scope.estimate.produce = {};
+        $scope.estimate.produce.total = 0.00;
         $('#formulario').removeClass('hide');
         $('#grid').addClass('hide');
     }
@@ -92,5 +95,46 @@ myApp.controller('estimateController', function($scope, $http, URL, toastr) {
     }
 
     $scope.searchRecipes();
+
+
+    //$scope.getTotal = function(ingredients){
+    //    var total = 0;
+    //    for(var i = 0; i < ingredients.length; i++){
+    //        total += ((ingredients[i].quantity * ingredients[i].product.vlr_unit)/ingredients[i].product.quantity );
+    //    }
+    //    return total;
+    //}
+
+    var calcular = function(){
+        $scope.estimate.produce.total = 0;
+        $scope.estimate.total = 0;
+        for(var i = 0; i < $scope.estimate.ingredients.length; i++){
+            $scope.estimate.produce.total += (($scope.estimate.ingredients[i].quantity * $scope.estimate.ingredients[i].product.vlr_unit)/$scope.estimate.ingredients[i].product.quantity );
+        }
+
+        $scope.estimate.produce.vlr_unit = $scope.estimate.produce.total / $scope.estimate.produce.quantity;
+        $scope.estimate.total += $scope.estimate.produce.vlr_unit;
+        $scope.estimate.total += $scope.estimate.packing.vlr_unit;
+
+        console.log($scope.estimate.packing.vlr_unit + 3 );
+
+        for(var y = 0; y < $scope.estimate.complements.length; y++) {
+            $scope.estimate.complements[y].complement.produce.total = 0;
+            for(var z = 0; z < $scope.estimate.complements[y].complement.ingredients.length; z++) {
+                $scope.estimate.complements[y].complement.produce.total += (($scope.estimate.complements[y].complement.ingredients[z].quantity * $scope.estimate.complements[y].complement.ingredients[z].product.vlr_unit)/$scope.estimate.complements[y].complement.ingredients[z].product.quantity );
+            }
+            $scope.estimate.complements[y].complement.produce.vlr_unit = $scope.estimate.complements[y].complement.produce.total / $scope.estimate.complements[y].complement.produce.quantity;
+            $scope.estimate.complements[y].complement.produce.vlr_utility = $scope.estimate.complements[y].complement.produce.vlr_unit * $scope.estimate.complements[y].quantity;
+            $scope.estimate.total += $scope.estimate.complements[y].complement.produce.vlr_utility;
+        }
+
+        $scope.estimate.total += ($scope.estimate.total * $scope.estimate.lost)/100;
+    }
+
+    $scope.choose = function(){
+        if( $scope.estimate)
+            calcular();
+    }
+
 
 });

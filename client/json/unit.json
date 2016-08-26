@@ -1,0 +1,26 @@
+[
+  {
+    "name":"unidade(s)",
+    "initials":"un"
+  },
+  {
+    "name":"kilo(s)",
+    "initials":"kg"
+  },
+  {
+    "name":"litro(s)",
+    "initials":"lt"
+  },
+  {
+    "name":"mililitro(s)",
+    "initials":"ml"
+  },
+  {
+    "name":"pacote(s)",
+    "initials":"pc"
+  },
+  {
+    "name":"grama(s)",
+    "initials":"gr"
+  }
+]

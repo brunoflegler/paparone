@@ -1,19 +1,26 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
-    //ProductShema = require('../products/model');
+    Schema = mongoose.Schema,
+    deepPopulate = require('mongoose-deep-populate')(mongoose);
 
-var UserSchema = new Schema({
+var RecipeSchema = new Schema({
     name : {type: String, required: true, index:{unique: true} },
+    packing : {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
+    lost : {type: Number, required:true},
+    produce: {
+        quantity : {type: Number, required:true},
+        unit : {type: mongoose.Schema.Types.ObjectId, ref: 'Unit'}
+    },
     ingredients:[{
         product : {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
-        quantity : {type: String, required:true}
+        quantity : {type: Number, required:true}
     }],
     complements : [{
         complement : {type: mongoose.Schema.Types.ObjectId, ref: 'Recipe'},
-        quantity : {type: String, required:true}
+        quantity : {type: Number, required:true}
     }]
 
 });
+RecipeSchema.plugin(deepPopulate, {});
 
 
-module.exports = mongoose.model('Recipe', UserSchema);
+module.exports = mongoose.model('Recipe', RecipeSchema);

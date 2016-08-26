@@ -53,14 +53,42 @@
 
 <div id="formulario" class="container hide">
     <form ng-submit="save()">
+        {{estimate}}
         <div class="row" >
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Receita</label>
                     <select name="condition" class="form-control input-sm" ng-model="estimate"
-                            ng-options="recipe as recipe.name for recipe in recipes " >
+                            ng-options="recipe as recipe.name for recipe in recipes " ng-change="choose()" >
                     </select>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                Total unitário: {{estimate.total | number:2}}
+            </div>
+        </div>
+        <hr/>
+        <label>Lista de Ingredientes</label>
+        <div class="row">
+            <div class="col-md-12">
+                Rende: {{estimate.produce.quantity}} {{estimate.produce.unit.name}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                Valor unitário: {{estimate.produce.vlr_unit | number:2}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                Embalagem: {{estimate.packing.vlr_unit | number:2}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                Perda: {{(estimate.total * estimate.lost)/100 | number:2}}
             </div>
         </div>
         <div class="row">
@@ -70,17 +98,18 @@
                     <th class="col-left" >Produto</th>
                     <th class="col-left" >Quantidade</th>
                     <th class="col-left" >Valor</th>
-                    <th class="col-center">Opções</th>
+                    <!--<th class="col-center">Opções</th>-->
                     </thead>
                     <tbody>
                     <tr ng-repeat="ingredient in estimate.ingredients" >
                         <td class="col-left">{{ingredient.product.name}}</td>
                         <td class="col-left">{{ingredient.quantity}}</td>
-                        <td class="col-left">{{(ingredient.quantity * ingredient.product.vlr_unit)/1000 }}</td>
-                        <td class="col-center" >
-                            <button ng-click="editIngredient($index)" class="btn btn-default btn-sm" type="button"><a class="fa fa-pencil"></a></button>&nbsp;
-                            <button ng-click="deleteIngredient($index)" class="btn btn-danger btn-sm" type="button"><a class="fa fa-trash-o fa-white"></a></button>&nbsp;
-                        </td>
+                        <td class="col-left">{{(ingredient.quantity * ingredient.product.vlr_unit)/ingredient.product.quantity | number : 2 }}</td>
+                    </tr>
+                    <tr>
+                       <td class="col-right" colspan="3">
+                           Total: {{estimate.produce.total | number:2 }}
+                       </td>
                     </tr>
                     </tbody>
                     <tr ng-if="load">
@@ -90,6 +119,71 @@
                     </tr>
                 </table>
             </div>
+        </div>
+        <hr/>
+        <label>Lista de Complementos</label>
+        <div class="row">
+            <div class="col-md-12" ng-repeat="item in estimate.complements">
+                <div class="row">
+                    <div class="col-md-12">
+                        {{item.complement.name}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Rende: {{item.complement.produce.quantity}} {{item.complement.produce.unit.name}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Valor unitário: {{item.complement.produce.vlr_unit | number:2 }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        Quantidade Utilizada: {{item.quantity }} {{item.complement.produce.unit.name}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div  class="col-md-12">
+                        Valor Total: {{item.complement.produce.vlr_utility | number :2 }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-condensed table-striped" >
+                            <thead >
+                            <th class="col-left" >Produto</th>
+                            <th class="col-left" >Quantidade</th>
+                            <th class="col-center" >Valor</th>
+                            <!--<th class="col-center">Opções</th>-->
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="ingredient in item.complement.ingredients" >
+                                <td class="col-left">{{ingredient.product.name}}</td>
+                                <td class="col-left">{{ingredient.quantity}}</td>
+                                <td class="col-center">{{(ingredient.quantity * ingredient.product.vlr_unit)/ingredient.product.quantity | number : 2 }}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-right" ></td>
+                                <td class="col-right" >
+                                    <b>Total</b>
+                                </td>
+                                <td class="col-center" >
+                                     {{item.complement.produce.total | number:2 }}
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tr ng-if="load">
+                                <td class="col-md-12 col-center" colspan="4">
+                                    <label><a class="fa fa-spinner fa-spin"></a></label>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row" style="padding-top: 15px">
             <div class="col-md-offset-10 col-md-1 ">
                 <button class="btn btn-default" ng-click="back()" type="button"><a class="fa fa-undo"></a>&nbsp;&nbsp;&nbsp;Fechar </button>

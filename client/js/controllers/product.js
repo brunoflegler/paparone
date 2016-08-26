@@ -1,4 +1,4 @@
-myApp.controller('productController', function($scope, $http, URL, toastr) {
+myApp.controller('productController', function($scope, $http, URL, toastr, $filter) {
 
     $scope.currentPage = 1;
     $scope.pageSize = 10;
@@ -16,6 +16,15 @@ myApp.controller('productController', function($scope, $http, URL, toastr) {
         });
     }
 
+    //TODO lista units
+    $scope.units = function () {
+        $http.get(URL.base + 'units').then(function (response) {
+            $scope.units = response.data;
+        }, function (error) {
+            console.log(error);
+        });
+    }
+
     //TODO lista total forms
     $scope.total = function () {
         $scope.load = true;
@@ -27,6 +36,7 @@ myApp.controller('productController', function($scope, $http, URL, toastr) {
     }
     $scope.list();
     $scope.total();
+    $scope.units();
 
     $scope.back = function(){
         $('#formulario').addClass('hide');
@@ -37,7 +47,8 @@ myApp.controller('productController', function($scope, $http, URL, toastr) {
     $scope.edit = function(product){
         $scope.product = {};
         angular.copy(product, $scope.product);
-
+        var unit = $filter('filter')($scope.units, $scope.product.unit )[0];
+        $scope.product.unit = unit;
         $('#formulario').removeClass('hide');
         $('#grid').addClass('hide');
     }
@@ -81,6 +92,17 @@ myApp.controller('productController', function($scope, $http, URL, toastr) {
             });
         }
     }
+
+    //TODO pagination
+    $scope.pageChangeHandler = function(page) {
+        var skip = (page - 1) * $scope.pageSize;
+
+        $http.get(URL.base + 'products/' + skip + '/' + $scope.pageSize ).then(function (response) {
+            $scope.products = response.data;
+        }, function (error) {
+            console.log(error);
+        });
+    };
 
 
 });

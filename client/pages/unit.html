@@ -1,24 +1,24 @@
 <div id="grid" class="container">
     <div class="panel">
         <div class="panel-heading">
-            <span class="panel-title"><i class="fa fa-table"></i>&nbsp;&nbsp;&nbsp;Listagem de Produtos</span>
+            <span class="panel-title"><i class="fa fa-table"></i>&nbsp;&nbsp;&nbsp;Listagem de Unidades</span>
         </div>
         <div class="panel-body">
             <table class="table table-condensed table-striped" export-csv="csv" separator=";" >
                 <thead >
                 <th class="col-left" >#</th>
-                <th class="col-left" >Produto</th>
-                <th class="col-left" >R$</th>
+                <th class="col-left" >Unidade</th>
+                <th class="col-left" >Sigla</th>
                 <th class="col-center">Opções</th>
                 </thead>
                 <tbody>
-                <tr dir-paginate="product in products | filter:q | itemsPerPage: pageSize" total-items="totalItens" current-page="currentPage" >
-                    <td class="col-left">{{product._id}}</td>
-                    <td class="col-left">{{product.name}}</td>
-                    <td class="col-left">{{product.vlr_unit | number : 2}}</td>
+                <tr dir-paginate="unit in units | filter:q | itemsPerPage: pageSize" total-items="totalItens" current-page="currentPage" >
+                    <td class="col-left">{{unit._id}}</td>
+                    <td class="col-left">{{unit.name}}</td>
+                    <td class="col-left">{{unit.initials}}</td>
                     <td class="col-center" >
-                        <button ng-click="edit(product)" class="btn btn-default btn-sm" type="button"><a class="fa fa-pencil"></a></button>&nbsp;
-                        <button ng-click="delete(product)" class="btn btn-danger btn-sm" type="button"><a class="fa fa-trash-o fa-white"></a></button>&nbsp;
+                        <button ng-click="edit(unit)" class="btn btn-default btn-sm" type="button"><a class="fa fa-pencil"></a></button>&nbsp;
+                        <button ng-click="delete(unit)" class="btn btn-danger btn-sm" type="button"><a class="fa fa-trash-o fa-white"></a></button>&nbsp;
                     </td>
                 </tr>
                 </tbody>
@@ -54,41 +54,16 @@
 <div id="formulario" class="container hide">
     <form ng-submit="save()">
         <div class="row" >
-            <div class="col-md-12">
+            <div class="col-md-10">
                 <div class="form-group">
-                    <label>Nome do Produto</label>
-                    <input class="form-control input-sm" required ng-model="product.name" >
+                    <label>Nome da Unidade</label>
+                    <input class="form-control input-sm" required ng-model="unit.name" >
                 </div>
             </div>
-        </div>
-        <div class="row" >
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
-                    <label>Unidade</label>
-                    <select ng-model="product.type" required="" class="form-control input-sm">
-                        <option ng-selected="product.type == 0" value="0">Ingredientes</option>
-                        <option ng-selected="product.type == 1" value="1">Embalagens</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label>Unidade</label>
-                    <select name="condition" class="form-control input-sm" ng-model="product.unit"
-                            ng-options="unit as unit.name for unit in units " >
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label>Quantidade de Referência</label>
-                    <input class="form-control input-sm" type="text" ui-number-mask="0" required ng-model="product.quantity">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label>R$</label>
-                    <input class="form-control input-sm" type="text" ui-number-mask="" required ng-model="product.vlr_unit">
+                    <label>Sigla da Unidade</label>
+                    <input class="form-control input-sm" required ng-model="unit.initials" >
                 </div>
             </div>
         </div>

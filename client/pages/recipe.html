@@ -51,12 +51,42 @@
 
 <div id="formulario" class="container hide">
     <form ng-submit="save()">
-        <!--{{recipe.complements}}-->
         <div class="row" >
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Nome da Receita</label>
                     <input class="form-control input-sm" required ng-model="recipe.name" >
+                </div>
+            </div>
+        </div>
+        <label>Rendimento: </label>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Unidade</label>
+                    <select name="condition" class="form-control input-sm" ng-model="recipe.produce.unit"
+                            ng-options="unit as unit.name for unit in units " >
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Quantidade</label>
+                    <input class="form-control input-sm" ui-number-mask="0"   ng-model="recipe.produce.quantity" >
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Embalagem</label>
+                    <select name="condition" class="form-control input-sm" ng-model="recipe.packing"
+                            ng-options="product as product.name for product in products | filter : {type : 1} " >
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Perda %</label>
+                    <input class="form-control input-sm" ui-number-mask="0"  ng-model="recipe.lost" >
                 </div>
             </div>
         </div>
@@ -67,12 +97,16 @@
                 <table class="table table-condensed table-striped" >
                     <thead >
                     <th class="col-left" >Produto</th>
+                    <th class="col-left" >Tipo</th>
+                    <th class="col-left" >Unidade</th>
                     <th class="col-left" >Quantidade</th>
                     <th class="col-center">Opções</th>
                     </thead>
                     <tbody>
                     <tr ng-repeat="ingredient in ingredients" >
                         <td class="col-left">{{ingredient.product.name}}</td>
+                        <td class="col-left">{{ingredient.product.type}}</td>
+                        <td class="col-left">{{ingredient.product.unit.initials}}</td>
                         <td class="col-left">{{ingredient.quantity}}</td>
                         <td class="col-center" >
                             <button ng-click="editIngredient($index)" class="btn btn-default btn-sm" type="button"><a class="fa fa-pencil"></a></button>&nbsp;
@@ -113,7 +147,7 @@
                         </td>
                     </tr>
                     <!--<tr >-->
-                        <!--<td colspan="3">Nenhum registro encontrado.</td>-->
+                    <!--<td colspan="3">Nenhum registro encontrado.</td>-->
                     <!--</tr>-->
                     </tbody>
                     <tr ng-if="load">
@@ -122,7 +156,7 @@
                         </td>
                     </tr>
                 </table>
-                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -161,10 +195,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-12">
                         <div class="form-group">
-                            <label>Quantidade</label>
-                            <input class="form-control input-sm"  ng-model="productSelect.quantity" >
+                            <label>Quantidade {{productSelect.product != null ? 'em ' + productSelect.product.unit.name : "" }} </label>
+                            <input class="form-control input-sm" ui-number-mask="0"  ng-model="productSelect.quantity" >
                         </div>
                     </div>
                 </div>
@@ -198,10 +232,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-12">
                         <div class="form-group">
-                            <label>Quantidade</label>
-                            <input class="form-control input-sm"  ng-model="complementSelect.quantity" >
+                            <label>Quantidade {{complementSelect.complement != null ? 'em ' + complementSelect.complement.produce.unit.name : "" }}</label>
+                            <input class="form-control input-sm" ui-number-mask="0"  ng-model="complementSelect.quantity" >
                         </div>
                     </div>
                 </div>

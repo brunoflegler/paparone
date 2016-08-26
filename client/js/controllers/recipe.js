@@ -1,4 +1,4 @@
-myApp.controller('recipeController', function($scope, $http, URL, toastr) {
+myApp.controller('recipeController', function($scope, $http, URL, toastr, $filter) {
 
     $scope.currentPage = 1;
     $scope.pageSize = 10;
@@ -42,6 +42,12 @@ myApp.controller('recipeController', function($scope, $http, URL, toastr) {
 
         $scope.complements = [];
         angular.copy($scope.recipe.complements, $scope.complements);
+
+        var unit = $filter('filter')($scope.units, $scope.recipe.produce.unit )[0];
+        $scope.recipe.produce.unit = unit;
+
+        var packing = $filter('filter')($scope.products, {_id : $scope.recipe.packing._id })[0];
+        $scope.recipe.packing = packing;
 
         $('#formulario').removeClass('hide');
         $('#grid').addClass('hide');
@@ -161,6 +167,18 @@ myApp.controller('recipeController', function($scope, $http, URL, toastr) {
     $scope.deleteComplement = function(index){
         alert('fazer o delete');
     }
+
+
+    //TODO lista units
+    $scope.units = function () {
+        $http.get(URL.base + 'units').then(function (response) {
+            $scope.units = response.data;
+        }, function (error) {
+            console.log(error);
+        });
+    }
+
+    $scope.units();
 
 
 

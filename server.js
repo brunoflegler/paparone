@@ -20,6 +20,7 @@ api.products = require('./modules/products/route');
 api.recipes = require('./modules/recipes/route');
 api.estimates = require('./modules/estimates/route');
 api.validation = require('./modules/validation/route');
+api.units = require('./modules/units/route');
 
 
 app.use(cors());
@@ -27,6 +28,7 @@ app.use('/paparone/users', api.users);
 app.use('/paparone/products', api.products);
 app.use('/paparone/recipes', api.recipes);
 app.use('/paparone/estimates', api.estimates);
+app.use('/paparone/units', api.units);
 app.use('/paparone/', api.validation);
 app.use('/paparone', express.static(path.join(__dirname, './client')));
 

@@ -1,44 +1,44 @@
 
 var express = require('express'),
     router = express.Router(),
-    Product = require('./model');
+    Unit = require('./model');
 
 router.get('/', function (req, res) {
-    Product.find({}, function(err, users) {
+    Unit.find({}, function(err, units) {
         if(err) {
             res.status(400);
             res.json(err.message);
         } else {
-            res.send(users);
+            res.send(units);
         }
-    }).populate('unit')
+    })
 });
 
 router.get('/:id', function(req, res) {
-    Product.findById(req.params.id, function(err, user) {
+    Unit.findById(req.params.id, function(err, unit) {
         if(err) {
             res.status(400);
             res.json(err.message);
         } else {
-            res.send(user);
+            res.send(unit);
         }
     });
 });
 
 router.get('/:skip/:limit', function (req, res) {
     console.log(req.params.skip);
-    Product.find({}, function(err, Forms) {
+    Unit.find({}, function(err, Forms) {
         if(err) {
             res.status(400);
             res.json(err.message);
         } else {
             res.send(Forms);
         }
-    }).skip(parseInt(req.params.skip)).limit(parseInt(req.params.limit)).populate('unit')
+    }).skip(parseInt(req.params.skip)).limit(parseInt(req.params.limit))
 });
 
 router.post('/', function(req, res) {
-    var product = new Product(req.body);
+    var product = new Unit(req.body);
     product.save(function (err) {
         if(err) {
             res.status(400);
@@ -53,7 +53,7 @@ router.post('/', function(req, res) {
 
 router.put('/', function(req, res) {
     var query ={_id: req.body._id};
-    Product.update(query, req.body, function(err, form) {
+    Unit.update(query, req.body, function(err, form) {
         if(err) {
             res.status(400);
             res.json(err.message);
@@ -65,7 +65,7 @@ router.put('/', function(req, res) {
 
 
 router.delete('/:id', function(req, res) {
-    Product.remove({_id: req.params.id}, function(err, user) {
+    Unit.remove({_id: req.params.id}, function(err, unit) {
         if(err) {
             res.status(400);
             res.json(err.message);
