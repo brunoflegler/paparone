@@ -72,7 +72,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Quantidade</label>
-                    <input class="form-control input-sm" ui-number-mask="0"   ng-model="recipe.produce.quantity" >
+                    <input class="form-control input-sm" ui-number-mask="2"   ng-model="recipe.produce.quantity" >
                 </div>
             </div>
             <div class="col-md-3">
@@ -80,6 +80,7 @@
                     <label>Embalagem</label>
                     <select name="condition" class="form-control input-sm" ng-model="recipe.packing"
                             ng-options="product as product.name for product in products | filter : {type : 1} " >
+                        <option value=""></option>
                     </select>
                 </div>
             </div>

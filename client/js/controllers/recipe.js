@@ -46,8 +46,10 @@ myApp.controller('recipeController', function($scope, $http, URL, toastr, $filte
         var unit = $filter('filter')($scope.units, $scope.recipe.produce.unit )[0];
         $scope.recipe.produce.unit = unit;
 
-        var packing = $filter('filter')($scope.products, {_id : $scope.recipe.packing._id })[0];
-        $scope.recipe.packing = packing;
+        if($scope.recipe.packing != null) {
+            var packing = $filter('filter')($scope.products, {_id: $scope.recipe.packing._id})[0];
+            $scope.recipe.packing = packing;
+        }
 
         $('#formulario').removeClass('hide');
         $('#grid').addClass('hide');
@@ -165,7 +167,7 @@ myApp.controller('recipeController', function($scope, $http, URL, toastr, $filte
     }
 
     $scope.deleteComplement = function(index){
-        alert('fazer o delete');
+
     }
 
 

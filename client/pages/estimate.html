@@ -53,7 +53,7 @@
 
 <div id="formulario" class="container hide">
     <form ng-submit="save()">
-        {{estimate}}
+        <!--{{estimate}}-->
         <div class="row" >
             <div class="col-md-12">
                 <div class="form-group">
@@ -66,7 +66,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                Total unitário: {{estimate.total | number:2}}
+                Total unitário: {{estimate.total | number:4}}
             </div>
         </div>
         <hr/>
@@ -76,9 +76,14 @@
                 Rende: {{estimate.produce.quantity}} {{estimate.produce.unit.name}}
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-if="estimate.produce.unit.initials == 'gr' ">
             <div class="col-md-12">
-                Valor unitário: {{estimate.produce.vlr_unit | number:2}}
+                Valor equivalente a 1 kg: {{(estimate.produce.vlr_unit * 1000) | number:4}}
+            </div>
+        </div>
+        <div class="row" ng-if="estimate.produce.unit.initials != 'gr' ">
+            <div class="col-md-12">
+                Valor por {{estimate.produce.unit.name}}: {{estimate.produce.vlr_unit | number:4}}
             </div>
         </div>
         <div class="row">
@@ -88,7 +93,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                Perda: {{(estimate.total * estimate.lost)/100 | number:2}}
+                Perda: {{(estimate.total * estimate.lost)/100 | number:4}}
             </div>
         </div>
         <div class="row">
@@ -134,9 +139,14 @@
                         Rende: {{item.complement.produce.quantity}} {{item.complement.produce.unit.name}}
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" ng-if="item.complement.produce.unit.initials == 'gr' ">
                     <div class="col-md-12">
-                        Valor unitário: {{item.complement.produce.vlr_unit | number:2 }}
+                        Valor equivalente a 1 kg: {{(item.complement.produce.vlr_unit * 1000) | number:4}}
+                    </div>
+                </div>
+                <div class="row" ng-if="item.complement.produce.unit.initials != 'gr' ">
+                    <div class="col-md-12">
+                        Valor por {{item.complement.produce.unit.name}}: {{item.complement.produce.vlr_unit | number:4}}
                     </div>
                 </div>
                 <div class="row">
@@ -180,6 +190,66 @@
                                 </td>
                             </tr>
                         </table>
+                    </div>
+                </div>
+                <hr/>
+                <label>Lista de Complementos</label>
+                <div class="row">
+                    <div class="col-md-12" ng-repeat="base in item.complement.complements">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{base.complement.name}}
+                            </div>
+                        </div>
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-12">-->
+                                <!--Rende: {{base.complement.produce.quantity}} {{base.complement.produce.unit.name}}-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-12">-->
+                                <!--Valor unitário: {{base.complement.produce.vlr_unit | number:2 }}-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-12">-->
+                                <!--Quantidade Utilizada: {{base.quantity }} {{base.complement.produce.unit.name}}-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                            <!--<div  class="col-md-12">-->
+                                <!--Valor Total: {{base.complement.produce.vlr_utility | number :2 }}-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-condensed table-striped" >
+                                    <thead >
+                                    <th class="col-left" >Produto</th>
+                                    <th class="col-left" >Quantidade</th>
+                                    <th class="col-center" >Valor</th>
+                                    <!--<th class="col-center">Opções</th>-->
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="ingredient in base.complement.ingredients" >
+                                        <td class="col-left">{{ingredient.product.name}}</td>
+                                        <td class="col-left">{{ingredient.quantity}}</td>
+                                        <td class="col-center">{{(ingredient.quantity * ingredient.product.vlr_unit)/ingredient.product.quantity | number : 2 }}</td>
+                                    </tr>
+                                    <!--<tr>-->
+                                        <!--<td class="col-right" ></td>-->
+                                        <!--<td class="col-right" >-->
+                                            <!--<b>Total</b>-->
+                                        <!--</td>-->
+                                        <!--<td class="col-center" >-->
+                                            <!--{{item.complement.produce.total | number:2 }}-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

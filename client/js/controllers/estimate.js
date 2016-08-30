@@ -111,12 +111,18 @@ myApp.controller('estimateController', function($scope, $http, URL, toastr) {
         for(var i = 0; i < $scope.estimate.ingredients.length; i++){
             $scope.estimate.produce.total += (($scope.estimate.ingredients[i].quantity * $scope.estimate.ingredients[i].product.vlr_unit)/$scope.estimate.ingredients[i].product.quantity );
         }
+        console.log($scope.estimate.produce.total);
+        console.log($scope.estimate.produce.quantity);
 
         $scope.estimate.produce.vlr_unit = $scope.estimate.produce.total / $scope.estimate.produce.quantity;
-        $scope.estimate.total += $scope.estimate.produce.vlr_unit;
-        $scope.estimate.total += $scope.estimate.packing.vlr_unit;
 
-        console.log($scope.estimate.packing.vlr_unit + 3 );
+        console.log($scope.estimate.produce.vlr_unit);
+
+        $scope.estimate.total += $scope.estimate.produce.vlr_unit;
+        if($scope.estimate.packing != null){
+            $scope.estimate.total += $scope.estimate.packing.vlr_unit;
+        }
+
 
         for(var y = 0; y < $scope.estimate.complements.length; y++) {
             $scope.estimate.complements[y].complement.produce.total = 0;

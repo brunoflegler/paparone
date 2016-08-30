@@ -19,7 +19,15 @@ var express = require('express'),
 
 router.get('/', function (req, res) {
     Recipe.find()
-        .deepPopulate('packing ingredients.product ingredients.product.unit complements.complement complements.complement.ingredients.product complements.complement.produce.unit produce.unit')
+        .deepPopulate('packing ' +
+        'ingredients.product ' +
+        'ingredients.product.unit ' +
+        'complements.complement ' +
+        'complements.complement.ingredients.product ' +
+        'complements.complement.complements.complement ' +
+        'complements.complement.complements.complement.ingredients.product ' +
+        'complements.complement.produce.unit ' +
+        'produce.unit')
         .exec(function (err, posts) {
             res.send(posts);
     });
@@ -39,7 +47,15 @@ router.get('/:id', function(req, res) {
 
 router.get('/:skip/:limit', function (req, res) {
     Recipe.find()
-        .deepPopulate('packing ingredients.product ingredients.product.unit complements.complement complements.complement.ingredients.product complements.complement.produce.unit produce.unit')
+        .deepPopulate('packing ' +
+        'ingredients.product ' +
+        'ingredients.product.unit ' +
+        'complements.complement ' +
+        'complements.complement.ingredients.product ' +
+        'complements.complement.complements.complement ' +
+        'complements.complement.complements.complement.ingredients.product ' +
+        'complements.complement.produce.unit ' +
+        'produce.unit')
         .skip(parseInt(req.params.skip)).limit(parseInt(req.params.limit))
         .exec(function (err, posts) {
             res.send(posts);
