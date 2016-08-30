@@ -1,0 +1,3 @@
+{"_id":{"$oid":"574b32503972a1c416ac5c97"},"username":"bruno.dalcol","password":"$2a$10$Ee9D/Hgt1.yp3ULqPBkUNuF8x2EbxQ1Lad8WroHUniZ2sU9/ILTjK","email":"bruno.flegler@gmail.com","__v":0}
+{"_id":{"$oid":"57a265ac11893bec1d25274a"},"password":"$2a$10$XZAaVAAZEpUH9QWbgr6eb.WZwyER3oBEyibjnPEZVi9Qs2EGbNf8m","username":"bruno.rossini","email":"berossini@gmail.com","__v":0}
+{"_id":{"$oid":"57ad47d83263a9bd14ec8388"},"password":"$2a$10$2vBWVrJuLV2Zc9MaigXzz.R2mId2QD65acy161n0tdDcpovLDXd3i","username":"mauricio.matrix","email":"mauricio@matrixonline.com.br","__v":0}

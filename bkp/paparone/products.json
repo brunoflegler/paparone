@@ -1,0 +1,28 @@
+{"_id":{"$oid":"57be3abe4b69de683a55097f"},"name":"Trigo","unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":"2","__v":0,"type":0}
+{"_id":{"$oid":"57be3b0e4b69de683a550980"},"name":"Fermento biológico seco","unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":500,"vlr_unit":"9.68","__v":0,"type":0}
+{"_id":{"$oid":"57be3b2b4b69de683a550981"},"name":"Óleo de soja","unit":{"$oid":"57be3b3b4b69de683a550982"},"quantity":900,"vlr_unit":"3.42","__v":0,"type":0}
+{"_id":{"$oid":"57be3b634b69de683a550983"},"name":"Ovo pasteurizado","unit":{"$oid":"57be3b3b4b69de683a550982"},"quantity":1000,"vlr_unit":"11.41","__v":0,"type":0}
+{"_id":{"$oid":"57be3b744b69de683a550984"},"name":"Banha","unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":"7.62","__v":0,"type":0}
+{"_id":{"$oid":"57be3b864b69de683a550985"},"name":"Margarina","unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":"5.34","__v":0,"type":0}
+{"_id":{"$oid":"57be3b984b69de683a550986"},"name":"Leite em pó","unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":"12.96","__v":0,"type":0}
+{"_id":{"$oid":"57be3ba84b69de683a550987"},"name":"Açúcar","unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":"3.41","__v":0,"type":0}
+{"_id":{"$oid":"57be3bc14b69de683a550988"},"name":"Sal","unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":"1.22","__v":0,"type":0}
+{"_id":{"$oid":"57be3bd64b69de683a550989"},"name":"Mix","unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":"35","__v":0,"type":0}
+{"_id":{"$oid":"57be3be44b69de683a55098a"},"name":"Água","unit":{"$oid":"57be3b3b4b69de683a550982"},"quantity":1000,"vlr_unit":"0","__v":0,"type":0}
+{"_id":{"$oid":"57be3bf74b69de683a55098b"},"name":"Mussarela  ralada","unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":"17","__v":0,"type":0}
+{"_id":{"$oid":"57be3c184b69de683a55098c"},"name":"Molho tomate","unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":"4.83","__v":0,"type":0}
+{"_id":{"$oid":"57be3c224b69de683a55098d"},"name":"Orégano","unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":"25.9","__v":0,"type":0}
+{"_id":{"$oid":"57be3c404b69de683a55098e"},"name":"Azeitona","unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":"20","__v":0,"type":0}
+{"_id":{"$oid":"57bf1889d0de28d0064db191"},"name":"Embalagem para pizza","unit":{"$oid":"57be3906e7e5be442ca8a4ed"},"quantity":1,"vlr_unit":2.92,"__v":0,"type":1}
+{"_id":{"$oid":"57c4be2ba3e2d27c049b5d27"},"name":"Arroz parboilizado","type":0,"unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":2.3,"__v":0}
+{"_id":{"$oid":"57c4bfdba12ac4a414fdfd85"},"name":"Carne - Patinho c/ correção","type":0,"unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":20.8,"__v":0}
+{"_id":{"$oid":"57c4bff2a12ac4a414fdfd86"},"name":"Cebola ralada","type":0,"unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":4,"__v":0}
+{"_id":{"$oid":"57c4c015a12ac4a414fdfd87"},"name":"Catchup Tridelli","type":0,"unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":3.87,"__v":0}
+{"_id":{"$oid":"57c4c028a12ac4a414fdfd88"},"name":"Amaciante","type":0,"unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":26.11,"__v":0}
+{"_id":{"$oid":"57c4c05ea12ac4a414fdfd89"},"name":"Champignon","type":0,"unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":22.81,"__v":0}
+{"_id":{"$oid":"57c4c071a12ac4a414fdfd8a"},"name":"Extrato de tomate","type":0,"unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":6.61,"__v":0}
+{"_id":{"$oid":"57c4c0c2a12ac4a414fdfd8b"},"name":"Leite longa vida","type":0,"unit":{"$oid":"57be3b3b4b69de683a550982"},"quantity":1000,"vlr_unit":2.83,"__v":0}
+{"_id":{"$oid":"57c4c0f4a12ac4a414fdfd8c"},"name":"Cravo","type":0,"unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":50,"__v":0}
+{"_id":{"$oid":"57c4c104a12ac4a414fdfd8d"},"name":"Louro","type":0,"unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":34,"__v":0}
+{"_id":{"$oid":"57c4c64945334628122605ca"},"type":1,"unit":{"$oid":"57be3906e7e5be442ca8a4ed"},"quantity":1,"vlr_unit":2.43,"name":"Embalagem para Strogonoff","__v":0}
+{"_id":{"$oid":"57c4c8e06fd4e20800a021b6"},"name":"Batata Palha","type":0,"unit":{"$oid":"57be38f4e7e5be442ca8a4ec"},"quantity":1000,"vlr_unit":21.3,"__v":0}
