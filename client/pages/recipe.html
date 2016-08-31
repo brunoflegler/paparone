@@ -72,7 +72,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Quantidade</label>
-                    <input class="form-control input-sm" ui-number-mask="2"   ng-model="recipe.produce.quantity" >
+                    <input class="form-control input-sm" ui-number-mask="3"   ng-model="recipe.produce.quantity" >
                 </div>
             </div>
             <div class="col-md-3">
@@ -84,11 +84,21 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label>Perda %</label>
                     <input class="form-control input-sm" ui-number-mask="0"  ng-model="recipe.lost" >
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!--<label>Valor total por receita: {{recipe.produce.vlr_total_lost |number : 2 }}  </label>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Custo total por {{recipe.produce.unit.name}} + Embalagem + Perda: {{recipe.produce.vlr_unit |number : 2 }}  </label>
             </div>
         </div>
         <hr/>
@@ -98,28 +108,37 @@
                 <table class="table table-condensed table-striped" >
                     <thead >
                     <th class="col-left" >Produto</th>
-                    <th class="col-left" >Tipo</th>
                     <th class="col-left" >Unidade</th>
+                    <th class="col-left" >Valor</th>
                     <th class="col-left" >Quantidade</th>
+                    <th class="col-left" >Total</th>
                     <th class="col-center">Opções</th>
                     </thead>
                     <tbody>
                     <tr ng-repeat="ingredient in ingredients" >
                         <td class="col-left">{{ingredient.product.name}}</td>
-                        <td class="col-left">{{ingredient.product.type}}</td>
                         <td class="col-left">{{ingredient.product.unit.initials}}</td>
-                        <td class="col-left">{{ingredient.quantity}}</td>
+                        <td class="col-left">{{ingredient.product.vlr_unit | number : 2}}</td>
+                        <td class="col-left">{{ingredient.quantity | number : 2 }}</td>
+                        <td class="col-left">{{(ingredient.product.vlr_unit / ingredient.product.quantity)* ingredient.quantity | number : 2}}</td>
                         <td class="col-center" >
                             <button ng-click="editIngredient($index)" class="btn btn-default btn-sm" type="button"><a class="fa fa-pencil"></a></button>&nbsp;
                             <button ng-click="deleteIngredient($index)" class="btn btn-danger btn-sm" type="button"><a class="fa fa-trash-o fa-white"></a></button>&nbsp;
                         </td>
                     </tr>
-                    </tbody>
-                    <tr ng-if="load">
-                        <td class="col-md-12 col-center" colspan="4">
-                            <label><a class="fa fa-spinner fa-spin"></a></label>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            Total
                         </td>
+                        <td>
+                            {{recipe.produce.vlr_total | number : 2}}
+                        </td>
+                        <td></td>
                     </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -128,34 +147,35 @@
                 <button class="btn btn-default" ng-click="modalIngredients()" type="button"><a class="fa fa-plus"></a>&nbsp;&nbsp;&nbsp;Ingredientes </button>
             </div>
         </div>
-        <hr/>
-        <label>Lista de Complementos</label>
         <div class="row">
+            <hr/>
+            <label>Lista de Complementos</label>
             <div class="col-md-12">
                 <table class="table table-condensed table-striped" >
                     <thead >
                     <th class="col-left" >Complemento</th>
                     <th class="col-left" >Quantidade</th>
+                    <th class="col-left" >Valor Unitário</th>
+                    <th class="col-left" >Valor Total</th>
                     <th class="col-center">Opções</th>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="complement in complements" >
+                    <tr ng-repeat="complement in complements" ng-if="complements.length > 0" >
                         <td class="col-left">{{complement.complement.name}}</td>
-                        <td class="col-left">{{complement.quantity}}</td>
+                        <td class="col-left">{{complement.quantity | number : 2}}</td>
+                        <td class="col-left">{{complement.complement.produce.vlr_unit | number : 2 }}</td>
+                        <td class="col-left">{{complement.complement.produce.vlr_unit * complement.quantity  | number : 2 }}</td>
                         <td class="col-center" >
                             <button ng-click="editComplement($index)" class="btn btn-default btn-sm" type="button"><a class="fa fa-pencil"></a></button>&nbsp;
                             <button ng-click="deleteComplement($index)" class="btn btn-danger btn-sm" type="button"><a class="fa fa-trash-o fa-white"></a></button>&nbsp;
                         </td>
                     </tr>
-                    <!--<tr >-->
-                    <!--<td colspan="3">Nenhum registro encontrado.</td>-->
-                    <!--</tr>-->
-                    </tbody>
-                    <tr ng-if="load">
-                        <td class="col-md-12 col-center" colspan="4">
-                            <label><a class="fa fa-spinner fa-spin"></a></label>
+                    <tr ng-if="complements.length == 0">
+                        <td colspan="3">
+                            Nenhum complemento cadastrado
                         </td>
                     </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -165,10 +185,10 @@
             </div>
         </div>
         <div class="row" style="padding-top: 15px">
-            <div class="col-md-offset-10 col-md-1 ">
+            <div class="col-md-offset-8 col-md-2 ">
                 <button class="btn btn-default" ng-click="back()" type="button"><a class="fa fa-undo"></a>&nbsp;&nbsp;&nbsp;Fechar </button>
             </div>
-            <div class=" col-md-1">
+            <div class=" col-md-2">
                 <button class="btn btn-primary" type="submit"><a class="fa fa-plus fa-white"></a>&nbsp;&nbsp;&nbsp;Salvar </button>
             </div>
         </div>
@@ -199,7 +219,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Quantidade {{productSelect.product != null ? 'em ' + productSelect.product.unit.name : "" }} </label>
-                            <input class="form-control input-sm" ui-number-mask="0"  ng-model="productSelect.quantity" >
+                            <input class="form-control input-sm" ui-number-mask="2"  ng-model="productSelect.quantity" >
                         </div>
                     </div>
                 </div>
@@ -236,7 +256,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Quantidade {{complementSelect.complement != null ? 'em ' + complementSelect.complement.produce.unit.name : "" }}</label>
-                            <input class="form-control input-sm" ui-number-mask="0"  ng-model="complementSelect.quantity" >
+                            <input class="form-control input-sm" ui-number-mask="2"  ng-model="complementSelect.quantity" >
                         </div>
                     </div>
                 </div>

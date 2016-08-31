@@ -8,7 +8,8 @@ var RecipeSchema = new Schema({
     lost : {type: Number, required:true},
     produce: {
         quantity : {type: Number, required:true},
-        unit : {type: mongoose.Schema.Types.ObjectId, ref: 'Unit'}
+        unit : {type: mongoose.Schema.Types.ObjectId, ref: 'Unit'},
+        vlr_unit : {type: Number, required:true}
     },
     ingredients:[{
         product : {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},

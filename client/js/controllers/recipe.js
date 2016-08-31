@@ -50,6 +50,7 @@ myApp.controller('recipeController', function($scope, $http, URL, toastr, $filte
             var packing = $filter('filter')($scope.products, {_id: $scope.recipe.packing._id})[0];
             $scope.recipe.packing = packing;
         }
+        valorAtual();
 
         $('#formulario').removeClass('hide');
         $('#grid').addClass('hide');
@@ -67,7 +68,9 @@ myApp.controller('recipeController', function($scope, $http, URL, toastr, $filte
 
     //TODO new recipe
     $scope.new = function(){
-        $scope.recipe = {}
+        $scope.recipe = {};
+        $scope.recipe.produce = {};
+        $scope.recipe.produce.lost = 0;
         $scope.recipe.ingredients = [];
         $scope.ingredients = [];
 
@@ -131,6 +134,8 @@ myApp.controller('recipeController', function($scope, $http, URL, toastr, $filte
         $scope.ingredients.push($scope.productSelect);
         $scope.recipe.ingredients.push({product: $scope.productSelect.product._id, quantity: $scope.productSelect.quantity});
         $('#modalIngredients').modal('hide');
+
+        valorAtual();
     }
 
     $scope.complementSelect = {};
@@ -182,6 +187,48 @@ myApp.controller('recipeController', function($scope, $http, URL, toastr, $filte
 
     $scope.units();
 
+
+    var valorAtual = function(){
+        if($scope.recipe != null) {
+            $scope.recipe.produce.vlr_total = 0;
+            for (var i = 0; i < $scope.ingredients.length; i++) {
+                $scope.recipe.produce.vlr_total += ($scope.ingredients[i].product.vlr_unit / $scope.ingredients[i].product.quantity) * $scope.ingredients[i].quantity;
+            }
+
+            //$scope.recipe.produce.vlr_total_lost = $scope.recipe.produce.vlr_total + (($scope.recipe.produce.vlr_total * $scope.recipe.lost) / 100);
+            //$scope.recipe.produce.vlr_unit = ($scope.recipe.produce.vlr_total_lost / $scope.recipe.produce.quantity);
+
+            var total_complements = 0
+            for (var y = 0; y < $scope.complements.length; y++) {
+                total_complements += $scope.complements[y].complement.produce.vlr_unit * $scope.complements[y].quantity;
+            }
+
+            //$scope.recipe.produce.vlr_unit += total_complements;
+            $scope.recipe.produce.vlr_unit = ($scope.recipe.produce.vlr_total / $scope.recipe.produce.quantity);
+            console.log($scope.recipe.produce.vlr_unit)
+            $scope.recipe.produce.vlr_unit += total_complements;
+            console.log($scope.recipe.produce.vlr_unit);
+            if ($scope.recipe.packing != null) {
+                $scope.recipe.produce.vlr_unit += $scope.recipe.packing.vlr_unit;
+            }
+            $scope.recipe.produce.vlr_unit += (($scope.recipe.produce.vlr_unit * $scope.recipe.lost) / 100);
+
+        }
+
+
+    }
+
+    $scope.$watch('recipe.lost', function(){
+        valorAtual();
+    });
+
+    $scope.$watch('recipe.produce.quantity', function(){
+        valorAtual();
+    });
+
+    $scope.$watch('recipe.packing', function(){
+        valorAtual();
+    });
 
 
 });
