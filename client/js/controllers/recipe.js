@@ -203,11 +203,15 @@ myApp.controller('recipeController', function($scope, $http, URL, toastr, $filte
                 total_complements += $scope.complements[y].complement.produce.vlr_unit * $scope.complements[y].quantity;
             }
 
-            //$scope.recipe.produce.vlr_unit += total_complements;
+            $scope.recipe.produce.vlr_total += total_complements;
+            console.log($scope.recipe.produce.vlr_total);
+
             $scope.recipe.produce.vlr_unit = ($scope.recipe.produce.vlr_total / $scope.recipe.produce.quantity);
-            console.log($scope.recipe.produce.vlr_unit)
-            $scope.recipe.produce.vlr_unit += total_complements;
+
             console.log($scope.recipe.produce.vlr_unit);
+            if ($scope.recipe.packing != null) {
+                $scope.recipe.produce.vlr_unit = $scope.recipe.produce.vlr_unit * $scope.recipe.quantity_pack ;
+            }
             if ($scope.recipe.packing != null) {
                 $scope.recipe.produce.vlr_unit += $scope.recipe.packing.vlr_unit;
             }
@@ -227,6 +231,10 @@ myApp.controller('recipeController', function($scope, $http, URL, toastr, $filte
     });
 
     $scope.$watch('recipe.packing', function(){
+        valorAtual();
+    });
+
+    $scope.$watch('recipe.quantity_pack', function(){
         valorAtual();
     });
 

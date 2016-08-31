@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
 var RecipeSchema = new Schema({
     name : {type: String, required: true, index:{unique: true} },
     packing : {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
+    quantity_pack : {type: Number, required:false},
     lost : {type: Number, required:true},
     produce: {
         quantity : {type: Number, required:true},
